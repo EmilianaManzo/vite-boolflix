@@ -13,6 +13,25 @@
         return{
           axios
         }
+      },
+
+      methods:{
+        getApi(){
+          axios.get(store.apiUrl, {
+            params : store.queryparam
+          })
+            .then(result => {
+              console.log(result.data.results);
+            })
+            .catch( error =>{
+              console.log(error);
+            })
+          
+        }
+      },
+
+      mounted(){
+        this.getApi()
       }
   }
 </script>

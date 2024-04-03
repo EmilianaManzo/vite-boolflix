@@ -5,8 +5,15 @@
 </script>
 
 <template>
-  <div>
-
+  <div class="container">
+    <div class="row">
+      <div class="col title">
+        <h1>BOOLFLIX</h1>
+      </div>
+      <div class="col">
+        
+      </div>
+    </div>
   </div>
 </template>
 
