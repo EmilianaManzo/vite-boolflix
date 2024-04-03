@@ -21,7 +21,8 @@
             params : store.queryparam
           })
             .then(result => {
-              console.log(result.data.results);
+              store.moviesList = result.data.results
+              console.log(store.moviesList);
             })
             .catch( error =>{
               console.log(error);
@@ -38,7 +39,7 @@
 
 
 <template>
-  <Header />
+  <Header @toSearch="getApi" />
   <Main />
 </template>
 

@@ -6,13 +6,38 @@ import CardSeries from './partials/CardSeries.vue';
     components:{
       CardFilm,
       CardSeries
+    },
+    data(){
+      return{
+        store
+      }
     }
   }
 </script>
 
 <template>
-  <CardFilm />
-  <CardSeries />
+  <main>
+    <div class="container">
+      <h2>FILM</h2>
+      <div class="row row-col-4 py-3">
+        <CardFilm
+        v-for="movie in store.moviesList "
+        :key="movie.id"
+        :title="movie.title"
+        :org_title="movie.original_title"
+        :language="movie.original_language"
+        :vote="movie.vote_average"
+        :overview="movie.overview"
+        :img="movie.poster_path"
+        />
+      </div>
+
+      <h2>SERIE</h2>
+      <div class="row row-col-4 py-3">
+        <CardSeries />
+      </div>
+    </div>
+  </main>
 </template>
 
 
