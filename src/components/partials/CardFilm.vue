@@ -1,4 +1,5 @@
 <script>
+import { store } from '../../data/store';
   export default {
     
   }
@@ -12,5 +13,5 @@
 
 
 <style lang="scss" scoped>
-@use '../assets/scss/main.scss'
+
 </style>

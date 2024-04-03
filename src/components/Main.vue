@@ -1,13 +1,18 @@
 <script>
+import {store} from '../data/store';
+import CardFilm from './partials/CardFilm.vue';
+import CardSeries from './partials/CardSeries.vue';
   export default {
-    
+    components:{
+      CardFilm,
+      CardSeries
+    }
   }
 </script>
 
 <template>
-  <div>
-
-  </div>
+  <CardFilm />
+  <CardSeries />
 </template>
 
 
