@@ -12,6 +12,7 @@ Titolo
 Titolo Originale
 Lingua
 Voto
+<!-- TODO: sistemare visualizzazione pagina prima della ricerca -->
 
 Milestone 2:
 Trasformiamo la stringa statica della lingua in una vera e propria bandiera della nazione corrispondente, gestendo il caso in cui non abbiamo la bandiera della nazione ritornata dall’API (le flag non ci sono in FontAwesome).

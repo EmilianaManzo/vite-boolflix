@@ -2,45 +2,51 @@
   import axios from 'axios';
   import {store} from './data/store';
   import Header from './components/Header.vue';
-  import Main from './components/Main.vue';
+  import CardsContainer from './components/CardsContainer.vue';
 
   export default {
       components:{
         Header,
-        Main
+        CardsContainer
       },
       data(){
         return{
-          axios
+          axios,
+          store
         }
       },
 
       methods:{
-        getApi(){
-          axios.get(store.apiUrl, {
+        getApi(type){
+          axios.get(store.apiUrl + type , {
             params : store.queryparam
           })
             .then(result => {
-              store.moviesList = result.data.results
-              console.log(store.moviesList);
+              store[type] = result.data.results
+              console.log(store[type]);
             })
             .catch( error =>{
               console.log(error);
             })
           
+        },
+        search(){
+          this.getApi('movie'),
+          this.getApi('tv')
         }
       },
 
       mounted(){
-        this.getApi()
+        this.search()
       }
   }
 </script>
 
 
 <template>
-  <Header @toSearch="getApi" />
-  <Main />
+  <Header @toSearch="search" />
+  <CardsContainer type="movie" v-if="store.movie.length > 0" />
+  <CardsContainer type="tv" v-if="store.tv.length > 0" />
 </template>
 
 

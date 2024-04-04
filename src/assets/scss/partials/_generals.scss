@@ -2,7 +2,6 @@
   background-color: transparent;
   width: 300px;
   height: 400px;
-  border: 1px solid #f1f1f1;
   perspective: 1000px;
 
   .flip-card-inner {
@@ -31,8 +30,14 @@
 
 
   .flip-card-back {
-    background-color: dodgerblue;
+    background-color: black;
     color: white;
     transform: rotateY(180deg);
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    strong{
+      color: red;
+    }
   }
 }
