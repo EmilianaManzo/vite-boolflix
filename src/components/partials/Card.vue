@@ -45,7 +45,10 @@ import { store } from '../../data/store';
               ><strong>Lingua:</strong> <img class="flag" :src="getImage(cardObj.original_language)" @error="isFlagload = false"  :alt="cardObj.original_language"> </p>
             <p v-else><strong>Lingua:</strong> {{ cardObj.original_language  }}</p>
 
-            <p><strong>Voto:</strong> <i v-for="star in 5" :key="star" class="fa-solid fa-star" :class="{'full': ratingStars() }"></i>
+            <p>
+              <strong>Voto:</strong> 
+              <i v-for="star in ratingStars() " :key="star" class="fa-solid fa-star full"></i>
+              <i v-for="star in (5 - ratingStars()) " :key="star" class="fa-solid fa-star"></i>
             </p>
             <p><strong>Trama:</strong> {{ cardObj.overview }} </p>
           </div>
