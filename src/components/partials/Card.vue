@@ -7,7 +7,8 @@ import { store } from '../../data/store';
 
     data(){
       return{
-        isFlagload : true
+        isFlagload : true,
+        isPosterload : true
       }
     },
 
@@ -22,10 +23,14 @@ import { store } from '../../data/store';
 <template>
     <div class="col py-2">
       <div class="flip-card">
+
         <div class="flip-card-inner">
+
           <div class="flip-card-front">
-            <img :src="`https://image.tmdb.org/t/p/w342${cardObj.poster_path}`" class="poster" :alt="cardObj.title || cardObj.name" >
+            <img v-if="isPosterload" @error="isPosterload = false" :src="`https://image.tmdb.org/t/p/w342${cardObj.poster_path}`" class="poster" :alt="cardObj.title || cardObj.name" >
+            <div v-else class="title-front w-100 h-100 ">{{ cardObj.title || cardObj.name }}</div>
           </div>
+
           <div class="flip-card-back px-2 py-3">
             <p><strong>Titolo:</strong> {{ cardObj.title || cardObj.name }} </p>
 
@@ -33,7 +38,7 @@ import { store } from '../../data/store';
 
             <p
               v-if="isFlagload"
-              ><strong>Lingua:</strong> <img class="flag" :src="getImage(cardObj.original_language )" @error="isFlagload = false"  alt=""> </p>
+              ><strong>Lingua:</strong> <img class="flag" :src="getImage(cardObj.original_language)" @error="isFlagload = false"  :alt="cardObj.original_language"> </p>
             <p v-else><strong>Lingua:</strong> {{ cardObj.original_language  }}</p>
 
             <p><strong>Voto:</strong> {{ cardObj.vote_average }} </p>
@@ -51,7 +56,17 @@ import { store } from '../../data/store';
 .poster{
   height: 100%;
   width: 100%;
+  
 }
+
+.title-front{
+  color : red;
+  text-align: center;
+  line-height: 400px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
 .flag{
   width: 30px;
 }

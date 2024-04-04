@@ -41,6 +41,6 @@ import Card from './partials/Card.vue';
 <style lang="scss" scoped>
 @use '../assets/scss/main.scss';
 main{
-  background-color: darkgrey;
+  background-color: rgba(169,169,169, 0.5);
 }
 </style>
