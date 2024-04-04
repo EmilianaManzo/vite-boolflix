@@ -15,6 +15,10 @@ import { store } from '../../data/store';
     methods:{
       getImage(image){
         return new URL (`../../assets/img/${image}.png` , import.meta.url).href
+      },
+
+      ratingStars(){
+        return Math.round(this.cardObj.vote_average / 2)
       }
     }
   }
@@ -41,7 +45,8 @@ import { store } from '../../data/store';
               ><strong>Lingua:</strong> <img class="flag" :src="getImage(cardObj.original_language)" @error="isFlagload = false"  :alt="cardObj.original_language"> </p>
             <p v-else><strong>Lingua:</strong> {{ cardObj.original_language  }}</p>
 
-            <p><strong>Voto:</strong> {{ cardObj.vote_average }} </p>
+            <p><strong>Voto:</strong> <i v-for="star in 5" :key="star" class="fa-solid fa-star" :class="{'full': ratingStars() }"></i>
+            </p>
             <p><strong>Trama:</strong> {{ cardObj.overview }} </p>
           </div>
         </div>
@@ -69,6 +74,10 @@ import { store } from '../../data/store';
 
 .flag{
   width: 30px;
+}
+
+.full{
+  color: yellow;
 }
 
 </style>
