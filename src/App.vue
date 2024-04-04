@@ -51,6 +51,9 @@
 
 
 <style lang="scss">
-@use './assets/scss/main.scss'
+@use './assets/scss/main.scss' as *;
+  body{
+  background-color: $bcg-color-cardcontainer;
+  }
 
 </style>

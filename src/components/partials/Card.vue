@@ -61,26 +61,4 @@ import { store } from '../../data/store';
 <style lang="scss" scoped>
 @use '../../assets/scss/main.scss';
 
-.poster{
-  height: 100%;
-  width: 100%;
-  
-}
-
-.title-front{
-  color : red;
-  text-align: center;
-  line-height: 400px;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.flag{
-  width: 30px;
-}
-
-.full{
-  color: yellow;
-}
-
 </style>
