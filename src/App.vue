@@ -19,9 +19,9 @@
       },
 
       methods:{
-        getApi(link,type,param){
+        getApi(link,type){
           axios.get(link + type , {
-            params : param
+            params : store.queryparam
           })
             .then(result => {
               store[type] = result.data.results
@@ -30,18 +30,30 @@
             .catch( error =>{
               console.log(error);
             })
-          
+        },
+
+        getApiTrend(link,type, arr){
+          axios.get(link + type + '/' + 'day', {
+            params : store.queryparamPopular
+          })
+            .then(result => {
+              arr = result.data.results
+              console.log(arr);
+            })
+            .catch( error =>{
+              console.log(error);
+            })
         },
         search(){
-          this.getApi(store.apiUrl ,'movie',store.queryparam),
-          this.getApi(store.apiUrl ,'tv',store.queryparam)
+          this.getApi(store.apiUrl ,'movie'),
+          this.getApi(store.apiUrl ,'tv')
         }
       },
 
       mounted(){
         this.search(),
-        this.getApi(store.apiTrendUrl ,'movie',store.queryparamPopular),
-        this.getApi(store.apiTrendUrl ,'tv',store.queryparamPopular)
+        this.getApiTrend(store.apiTrendUrl ,'movie',store.moviePopular),
+        this.getApiTrend(store.apiTrendUrl ,'tv', store.tvPopular)
       },
 
       computed(){
@@ -53,8 +65,8 @@
 
 <template>
   <Header @toSearch="search" />
-  <Swiper type="movie"/>
-  <Swiper type="tv"/>
+  <Swiper type="moviePopular"/>
+  <Swiper type="tvPopular"/>
   <CardsContainer type="movie" v-if="store.movie.length > 0" />
   <CardsContainer type="tv" v-if="store.tv.length > 0" />
 </template>
