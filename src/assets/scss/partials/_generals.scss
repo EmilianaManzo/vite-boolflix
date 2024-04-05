@@ -1,5 +1,26 @@
 @use './variables' as *;
 
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  // box-shadow: inset 0 0 5px grey; 
+  border-radius: 10%;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: red; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
+
 .flip-card {
   background-color: transparent;
   width: 300px;
@@ -12,6 +33,8 @@
 
     .flip-card-front, .flip-card-back {
       position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
     }
@@ -31,30 +54,78 @@
     }
 
     .flip-card-back {
-      display: none;
-      background-color: $bcg-color-transparent;
+      opacity: 0;
+      padding: 0;
+      transition: 0.5s linear;
       color: $white-text;
-      overflow-y: scroll;
-      overflow-x: hidden;
-  
-      strong{
-        color: $red-text ;
-      }
 
-      .flag{
-        width: 30px;
+      .borders{
+        border: 3px solid $red-text;
+        opacity: 0;
+        transition: 0.7s ease-in-out;
+        animation: mymove 0.4s ease-out ; 
+
+        p{
+          opacity: 0;
+          transition: 0.4s 0.2s ease;
+        }
+
+        strong{
+          color: $red-text ;
+        }
+
+        
+        .flag{
+          width: 30px;
+        }
+        
+        .full{
+          color: $full-star;
+        }
+
+        .plot{
+          height: 145px;
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
       }
-      
-      .full{
-        color: $bcg-color-cardcontainer;
+    }
+    
+    
+    &:hover .flip-card-back{
+      opacity: 1;
+      padding: 8px;
+      & .borders{
+        opacity: 1;
+        border-radius: 10px;
+        & p{
+          opacity: 1;
+        }
       }
-      
     }
 
-  
-    &:hover .flip-card-back{
-      display: block;
-    }    
+    &:hover .flip-card-front{
+      filter: grayscale(1) brightness(0.4);
+    }     
   }
 }  
+
+@keyframes mymove {
+  0%{
+    border-radius: 0px;
+  }
+  25%{
+    border-radius: 2px;
+  }
+  50%{
+    border-radius: 5px;
+  }
+  75%{
+    border-radius: 7px;
+  }
+  100%{
+    border-radius: 10px;
+  }
+
+}
 

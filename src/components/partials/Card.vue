@@ -35,22 +35,25 @@ import { store } from '../../data/store';
             <div v-else class="title-front w-100 h-100 ">{{ cardObj.title || cardObj.name }}</div>
           </div>
 
-          <div class="flip-card-back px-2 py-3">
-            <p><strong>Titolo:</strong> {{ cardObj.title || cardObj.name }} </p>
+          <div class="flip-card-back">
+            <div class="borders h-100 p-3 ">
+              <p><strong>Titolo:</strong> {{ cardObj.title || cardObj.name }} </p>
 
-            <p><strong>Titolo originale:</strong> {{ cardObj.original_title || cardObj.original_name }} </p>
+              <p><strong>Titolo originale:</strong> {{ cardObj.original_title || cardObj.original_name }} </p>
 
-            <p
-              v-if="isFlagload"
-              ><strong>Lingua:</strong> <img class="flag" :src="getImage(cardObj.original_language)" @error="isFlagload = false"  :alt="cardObj.original_language"> </p>
-            <p v-else><strong>Lingua:</strong> {{ cardObj.original_language  }}</p>
+              <p
+                v-if="isFlagload"
+                ><strong>Lingua:</strong> <img class="flag" :src="getImage(cardObj.original_language)" @error="isFlagload = false"  :alt="cardObj.original_language"> </p>
+              <p v-else><strong>Lingua:</strong> {{ cardObj.original_language  }}</p>
 
-            <p>
-              <strong>Voto:</strong> 
-              <i v-for="star in ratingStars() " :key="star" class="fa-solid fa-star full"></i>
-              <i v-for="star in (5 - ratingStars()) " :key="star" class="fa-solid fa-star"></i>
-            </p>
-            <p><strong>Trama:</strong> {{ cardObj.overview }} </p>
+              <p>
+                <strong>Voto:</strong> 
+                <i v-for="star in ratingStars() " :key="star" class="fa-solid fa-star full"></i>
+                <i v-for="star in (5 - ratingStars()) " :key="star" class="fa-solid fa-star"></i>
+              </p>
+              <p class="plot"><strong>Trama:</strong>{{ cardObj.overview }}</p>
+            </div>
+            
           </div>
         </div>
       </div>
