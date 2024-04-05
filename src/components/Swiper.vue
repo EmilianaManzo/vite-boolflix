@@ -39,7 +39,6 @@
       :slidesPerView="5"
       :spaceBetween="30"
       :freeMode="true"
-      :pagination="{ clickable: true, }"
       :modules="modules"
       class="mySwiper"
     >
@@ -61,6 +60,7 @@
 .swiper {
   width: 100%;
   height: 300px;
+  margin-bottom: 20px;
 }
 .swiper-slide {
   text-align: center;

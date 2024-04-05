@@ -15,7 +15,7 @@ import {store} from '../data/store';
     <div class="container h-100 ">
       <div class="row d-flex h-100 ">
         <div class="col title d-flex align-items-center ">
-          <h1 class="text-danger">BOOLFLIX</h1>
+          <h1 class="text-danger" @click="$emit('homepage')">BOOLFLIX</h1>
         </div>
         <div class="col d-flex align-items-center justify-content-end ">
           <input 
@@ -38,6 +38,8 @@ import {store} from '../data/store';
 header{
   height: 100px;
   background-color: black;
-  
+  .title{
+    cursor: pointer;
+  }
 }
 </style>

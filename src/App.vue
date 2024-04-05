@@ -26,19 +26,20 @@
             .then(result => {
               store[type] = result.data.results
               console.log(store[type]);
+              store.queryparam.query = ''
             })
             .catch( error =>{
               console.log(error);
             })
         },
 
-        getApiTrend(link,type, arr){
-          axios.get(link + type + '/' + 'day', {
+        getApiTrend(type, arr){
+          axios.get(store.apiTrendUrl + type + '/' + 'day', {
             params : store.queryparamPopular
           })
             .then(result => {
-              arr = result.data.results
-              console.log(arr);
+              store[arr] = result.data.results
+              console.log(store[arr]);
             })
             .catch( error =>{
               console.log(error);
@@ -47,13 +48,17 @@
         search(){
           this.getApi(store.apiUrl ,'movie'),
           this.getApi(store.apiUrl ,'tv')
+        },
+        reset(){
+          store.movie = [],
+          store.tv = []
         }
       },
 
       mounted(){
         this.search(),
-        this.getApiTrend(store.apiTrendUrl ,'movie',store.moviePopular),
-        this.getApiTrend(store.apiTrendUrl ,'tv', store.tvPopular)
+        this.getApiTrend('movie','moviePopular'),
+        this.getApiTrend('tv', 'tvPopular')
       },
 
       computed(){
@@ -64,9 +69,9 @@
 
 
 <template>
-  <Header @toSearch="search" />
-  <Swiper type="moviePopular"/>
-  <Swiper type="tvPopular"/>
+  <Header @toSearch="search" @homepage="reset" />
+  <Swiper type="moviePopular" v-if="store.movie.length == 0 && store.tv.length == 0"/>
+  <Swiper type="tvPopular" v-if="store.movie.length == 0 && store.tv.length == 0"/>
   <CardsContainer type="movie" v-if="store.movie.length > 0" />
   <CardsContainer type="tv" v-if="store.tv.length > 0" />
 </template>
