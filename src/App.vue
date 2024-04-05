@@ -3,11 +3,13 @@
   import {store} from './data/store';
   import Header from './components/Header.vue';
   import CardsContainer from './components/CardsContainer.vue';
+  import Swiper from './components/Swiper.vue';
 
   export default {
       components:{
         Header,
-        CardsContainer
+        CardsContainer,
+        Swiper,
       },
       data(){
         return{
@@ -17,9 +19,9 @@
       },
 
       methods:{
-        getApi(type){
-          axios.get(store.apiUrl + type , {
-            params : store.queryparam
+        getApi(link,type,param){
+          axios.get(link + type , {
+            params : param
           })
             .then(result => {
               store[type] = result.data.results
@@ -31,13 +33,19 @@
           
         },
         search(){
-          this.getApi('movie'),
-          this.getApi('tv')
+          this.getApi(store.apiUrl ,'movie',store.queryparam),
+          this.getApi(store.apiUrl ,'tv',store.queryparam)
         }
       },
 
       mounted(){
-        this.search()
+        this.search(),
+        this.getApi(store.apiTrendUrl ,'movie',store.queryparamPopular),
+        this.getApi(store.apiTrendUrl ,'tv',store.queryparamPopular)
+      },
+
+      computed(){
+        
       }
   }
 </script>
@@ -45,6 +53,8 @@
 
 <template>
   <Header @toSearch="search" />
+  <Swiper type="movie"/>
+  <Swiper type="tv"/>
   <CardsContainer type="movie" v-if="store.movie.length > 0" />
   <CardsContainer type="tv" v-if="store.tv.length > 0" />
 </template>
